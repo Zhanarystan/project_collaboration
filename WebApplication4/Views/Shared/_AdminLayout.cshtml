@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB</title>
+
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+        <div class="row">
+            <div class="col-md-2" style="background: #2b2d2b;">
+                <a class="navbar-brand" href="/Admin/Index"><div style="color:white;">Database Management</div></a>
+            </div>
+            <div class="col-md-10" style="background: #2b2d2b;">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Sign out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" style="height: 100%;">
+            <div class="col-md-2" style="background: #e7eee7;">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link disabled">ADMIN PANEL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="/Admin/Index">Specifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Admin/Users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Admin/Projects">Projects</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
+
+</body>
+</html>

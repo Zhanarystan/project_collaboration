@@ -1,0 +1,26 @@
+﻿@model WebApplication4.Models.EnrollmentRequests
+<div>
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserId, new { Value = @ViewBag.UserId })
+        @Html.HiddenFor(model => model.ProjectId, new { Value = @ViewBag.ProjectId })
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.RequestMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <br />
+        <div>
+
+            @Html.TextAreaFor(model => model.RequestMessage, new {  @class = "form-control", rows = "", cols = "", style = "width: 90%; height: 50px;" } )
+            @Html.ValidationMessageFor(model => model.RequestMessage, "", new { @class = "text-danger" })
+        </div>
+        <div style="margin-top:10px;">
+            <button class="btn btn-primary">Request</button>
+        </div>
+        
+    }
+
+
+</div>

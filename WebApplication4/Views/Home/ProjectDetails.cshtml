@@ -1,0 +1,61 @@
+﻿@model WebApplication4.Models.Projects
+@using Microsoft.AspNet.Identity
+@{
+    WebApplication4.Models.EnrollmentRequests m = new WebApplication4.Models.EnrollmentRequests();
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card" style="margin-top:50px;">
+            <div class="card-header">
+                <h2>@Model.Title</h2>
+            </div>
+            <br />
+            <div class="card-body">
+                <p class="card-text">@Model.Description</p>
+                <br />
+                <h4>@Model.PostedBy.UserName</h4>
+                <h5>Email: @Model.PostedBy.Email</h5>
+                @if (ViewBag.EnrollmentRequest != null &&
+                    ViewBag.EnrollmentRequest.UserId==User.Identity.GetUserId())
+                {
+            <form action="/Home/RequestProcessing" method="post">
+                <input type="hidden" name="user_id" value="@User.Identity.GetUserId()" />
+                <input type="hidden" name="project_id" value="@Model.Id"/>
+                <button type="submit" name="reject" class="btn btn-danger">CANCEL REQUEST</button>
+            </form>
+
+                }
+                else
+                {
+                    <div id="RequestToEnroll"></div>
+                    @Html.ActionLink("Request to enroll", "RequestToEnroll", "Home", new { id = Model.Id },
+                     new { @class = "viewDialog", data_dialog_title = "Request" })
+                }
+
+            </div>
+            <br />
+            <div class="card-footer">
+                <p>@Model.PostedDate</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                @foreach (WebApplication4.Models.Enrollments en in ViewBag.Enrollments)
+                {
+                    <h6>@en.User.UserName</h6>
+                    <p>Email: @en.User.Email</p>
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        @Html.ValidationMessageFor(WebApplication4.Models.EnrollmentRequests m => m);
+    </div>
+</div>
+
+
+
